@@ -10,4 +10,5 @@ try {
 }catch(err) {
     console.log(err.message)
 }
+
 export const db = mongoClient.db()
