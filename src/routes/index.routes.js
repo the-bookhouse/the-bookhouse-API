@@ -1,8 +1,10 @@
-import { Router } from 'express'
-import cartRouter from './cart.routes.js'
+import { Router } from "express";
+import authRouter from "./auth.routes.js";
+import cartRouter from "./cart.routes.js";
 
-const router = Router()
+const router = Router();
 
-router.use(cartRouter)
+router.use(authRouter);
+router.use(cartRouter);
 
-export default router
+export default router;
