@@ -6,6 +6,12 @@ export async function postProducts(req, res) {
 }
 
 export async function getProducts(req, res) {
-    //usado pela pagina de carrinho para pegar da collection carrinho todos os produtos adicionados pelo id do user
-    //deve retornar uma lista contendo os produtos selecionados e a quantidade
+    const {user, session} = res.locals
+    try {
+        const products = await db.collection('cart').find({ userId: user.userId}).toArray()
+        if(!products) return res.send([])
+        res.send(products)
+    }catch(err) {
+        res.status(500).send(err.message)
+    }
 }
