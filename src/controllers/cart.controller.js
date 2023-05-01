@@ -19,7 +19,7 @@ export async function getProducts(req, res) {
 export async function postSale(req, res) {
     const { userId, value } = req.body
     try {
-        await db.collection('sales').insertOne({ userId, value })
+        const saleadded = await db.collection('sales').insertOne({ userId, value })
         return res.sendStatus(201)
     } catch (err) {
         res.status(500).send(err.message)

@@ -22,6 +22,9 @@ export async function saveOrder(req, res) {
       total: total,
     });
     const order = await db.collection("order").findOne({ _id: result.insertedId });
+    if(order) {
+      await db.collection("cart").deleteMany({userId: new ObjectId(session.userId)})
+    }
     res.status(200).send(order)
   } catch (error) {
     res.status(500).send({ error: error.message });
